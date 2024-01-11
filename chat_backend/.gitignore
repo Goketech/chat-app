@@ -1,0 +1,38 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+
+# Static files
+/static/
+
+# Media files
+/media/
+
+# Database
+db.sqlite3
+*.sqlite3
+
+# Virtual environment
+venv/
+env/
+
+# IDE files
+.idea/
+.vscode/
+
+# Project specific
+*.pyc
+*.swo
+*.swp
+*.db
+*.sqlite3
+*.log
