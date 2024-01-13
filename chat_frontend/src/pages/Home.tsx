@@ -1,5 +1,10 @@
+import React from 'react';
+import NoChats from '../components/NoChats';
+
 const Home = () => {
-  return <div className='text-red-500'>Home</div>;
+  return <div>
+    <NoChats />
+  </div>;
 };
 
 export default Home;
