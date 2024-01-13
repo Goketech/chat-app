@@ -3,11 +3,10 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    username = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['']
 
 
     def profile(self):
@@ -24,7 +23,7 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
         if self.full_name == "" or self.full_name == None:
-            self.full_name = self.user.username
+            self.full_name = self.user.email
         super(Profile, self).save(*args, **kwargs)
 
 

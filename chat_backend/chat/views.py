@@ -101,9 +101,9 @@ class SearchUser(generics.ListAPIView):
     permission_classes = [IsAuthenticated]  
 
     def list(self, request, *args, **kwargs):
-        username = self.kwargs['username']
+        email = self.kwargs['email']
         logged_in_user = self.request.user
-        users = Profile.objects.filter(Q(user__username__icontains=username) | Q(full_name__icontains=username) | Q(user__email__icontains=username) & 
+        users = Profile.objects.filter(Q(user__email__icontains=email) & 
                                        ~Q(user=logged_in_user))
 
         if not users.exists():

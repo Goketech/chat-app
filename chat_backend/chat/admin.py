@@ -3,7 +3,7 @@ from chat.models import Message, Profile, User
 
 # Register your models here.
 class UserAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email']
+    list_display = ['email']
 
 
 class ProfileAdmin(admin.ModelAdmin):
