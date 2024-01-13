@@ -4,6 +4,8 @@ const NoChats = () => {
     const [isModalOpen, setModalOpen] = useState<boolean>(false);
     const [isSuccessSliderVisible, setSuccessSliderVisible] = useState<boolean>(false);
     const modalRef = useRef<HTMLDivElement>(null);
+    const successRef = useRef<HTMLDivElement>(null);
+
 
     const handleButtonClick = () => {
         setModalOpen(true);
@@ -25,6 +27,12 @@ const NoChats = () => {
         }
     };
 
+    const handleSuccessOverlayClick = (event: MouseEvent) => {
+        if (successRef.current && !successRef.current.contains(event.target as Node)) {
+            setSuccessSliderVisible(false);
+        }
+    };
+
     useEffect(() => {
         if (isModalOpen) {
             document.addEventListener('mousedown', handleOverlayClick);
@@ -34,6 +42,16 @@ const NoChats = () => {
             document.removeEventListener('mousedown', handleOverlayClick);
         };
     }, [isModalOpen]);
+
+    useEffect(() => {
+        if (isSuccessSliderVisible) {
+            document.addEventListener('mousedown', handleSuccessOverlayClick);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleSuccessOverlayClick);
+        };
+    }, [isSuccessSliderVisible]);
 
 
     return (
@@ -75,16 +93,22 @@ const NoChats = () => {
 
             {/* Success Slider */}
             {isSuccessSliderVisible && (
-                <div className="fixed top-0 right-0 bg-green-500 text-white p-4">
-                    Form submitted successfully!
-                    <button onClick={handleCloseSuccessSlider} className="ml-4">
-                        Close
-                    </button>
-                </div>
+
+                <>
+                    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-filter"></div>
+                    <div ref={successRef} className="fixed top-[100px] right-[30px] bg-white bg-opacity-90 text-black p-4 rounded-md shadow-lg">
+                        Form submitted successfully!
+                        <button onClick={handleCloseSuccessSlider} className="ml-4">
+                            Close
+                        </button>
+                    </div>
+                </>
+
             )}
         </div>
 
     )
 }
+
 
 export default NoChats
